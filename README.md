@@ -1,4 +1,4 @@
-#oiak-p-spoiler-2020
+# oiak-p-spoiler-2020
 OiAK project, Spoiler, 2020
 
 Osoba kontaktowa: Artur Saferna 235718
