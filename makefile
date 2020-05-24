@@ -1,2 +1,2 @@
 all:
-	gcc -o store store.c
+	gcc -m32 store.c -o store 
