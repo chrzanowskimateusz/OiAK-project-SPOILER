@@ -37,6 +37,19 @@ int makeSpace()
     return oldaddress;
 }
 
+void load(int address, int index)
+{
+
+    __asm__ volatile (
+            "movl %1, %%ecx\n"
+            "movl %0, %%eax\n"
+            "movl $1, (%%eax, %%ecx)\n"
+            :
+            :"g"(address), "g"(index)
+            :"memory"
+    );
+}
+
 int main(void)
 {
 	printf("The page size for this system is %ld bytes.\n",
@@ -48,6 +61,7 @@ int main(void)
     int address = 0; 
 
     address = makeSpace();
+    load(address, 1);
 
 	return 0;
 }
