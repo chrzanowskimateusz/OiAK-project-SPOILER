@@ -18,7 +18,7 @@ int makeSpace()
             "xorl %%ebx, %%ebx\n\t"
             "int $0x80\n\n\t"   //sys_brk - dostajemy aktualny adres brk
 
-           "movl %%eax, %1\n\t" //aktualna pozycja brk 
+            "movl %%eax, %1\n\t" //aktualna pozycja brk 
             "movl %%eax, %%ebx\n\t"
             "addl %2, %%ebx\n\t" //4096(bytes)*64
             "movl $45, %%eax\n\t"
@@ -37,7 +37,7 @@ int makeSpace()
     return oldaddress;
 }
 
-void load(int address, int index)
+void store(int address, int index)
 {
 
     __asm__ volatile (
@@ -61,7 +61,8 @@ int main(void)
     int address = 0; 
 
     address = makeSpace();
-    load(address, 1);
+    for(int i = 64; i < 0; i--)
+        store(address, i);
 
 	return 0;
 }
