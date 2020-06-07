@@ -1,0 +1,1 @@
+cmd_/home/hazeltrap/OiAK_git/oiak-p-spoiler-2020/time_measure_module/test.mod := { echo  /home/hazeltrap/OiAK_git/oiak-p-spoiler-2020/time_measure_module/test.o; echo; } > /home/hazeltrap/OiAK_git/oiak-p-spoiler-2020/time_measure_module/test.mod
