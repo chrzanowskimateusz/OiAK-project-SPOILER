@@ -10,6 +10,7 @@
 
 #include "clock_start.c"
 #include "clock_stop.c"
+#include "store.c"
 
 
 //najlepiej do tego modułu zaincludować load i store, bo nie znam się na tyle dobrze
@@ -27,7 +28,9 @@ static int __init test_start(void){
 
     preempt_disable();          // te linijki służą do
     raw_local_irq_save(flags);  //przejęcia pełnej kontrolii nad CPU
-
+    int address = makeSpace();
+    for(int p = 64; p < number_of_pages; p++) //powinno przesunac o jedna strone do przodu po zapisaniu całego okienka
+        store(address, p);
     start = clock_start();
     printk("testtesttest %d\n", 10);  // <- tutaj samego loada do pomiaru, najlepiej jako osobną funkcję
     end = clock_stop();
