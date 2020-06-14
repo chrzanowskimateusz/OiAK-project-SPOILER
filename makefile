@@ -1,2 +1,5 @@
 all:
-	gcc -m32 store.c -o store 
+	gcc -m32 main.c -o main
+
+clean:
+	rm main
