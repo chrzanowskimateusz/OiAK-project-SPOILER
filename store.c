@@ -58,22 +58,19 @@ void store(int address, int index)
     }
 }
 
-void load(int address)
+void load(int address, int index)
 {
     int size = 32;
     int load = 0;
-	
-    for(int i = 0; i < 1024; i ++)  //powinno zapisac cala strone
-    {
+
         __asm__ volatile (
             "movl %1, %%ecx\n"
             "movl %0, %%eax\n"
             "movl (%%eax, %%ecx), %%ebx \n"
             :
-            :"g"(address), "g"(size*i)
+            :"g"(address), "g"(size*index)
             :"ebx", "memory"
         );
-    }
 }
 
 int main(void)
@@ -90,7 +87,10 @@ int main(void)
     for(int p = 64; p < number_of_pages; p++) //powinno przesunac o jedna strone do przodu po zapisaniu całego okienka
     {
         store(address, p);
-        load(address);
+        for(int i = 0; i < 1024; i ++)  //powinno zapisac cala strone
+        {
+            load(address, i);
+        }
     }    
 
 	return 0;
