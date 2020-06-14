@@ -30,14 +30,14 @@ int main(void)
     for( p = 64; p < number_of_pages; p++){
       store(address, p);
       start1=clock_start();
-      load(address, p);
+      load(address);
       end1 = clock_stop();
       measure[p] = end1 - start1;
     }
 
 
     for( p = 64; p < number_of_pages; p++){
-      printf("wynik= %lld\n", measure[p]);
+      printf("%d. wynik= %lld\n", p, measure[p]);
     }
 
 	return 0;
