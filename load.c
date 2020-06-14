@@ -1,17 +1,19 @@
-void load(int address)
+void store(int address, int index)
 {
     int size = 32;
-    int load = 0;
 
-    for(int i = 0; i < 1024; i ++)  //powinno zapisac cala strone
+
+    for(int j = 64; j<0; j--)   //powinno zapisać okienko
+    for(int i = 0; i < 1024; i ++)     //powinno zapisac cala strone
     {
+
         __asm__ volatile (
             "movl %1, %%ecx\n"
             "movl %0, %%eax\n"
-            "movl (%%eax, %%ecx), %%ebx \n"
+            "movl $1, (%%eax, %%ecx)\n"
             :
-            :"g"(address), "g"(size*i)
-            :"ebx", "memory"
+            :"g"(address), "g"(size*i + (index-j)*4096*8)
+            :"memory"
         );
     }
 }

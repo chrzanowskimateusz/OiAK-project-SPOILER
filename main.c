@@ -4,7 +4,7 @@
 #include <string.h>
 #include <time.h>
 #include <stdint.h>
-
+#include <stdio.h>
 #include "clock_start.c"
 #include "clock_stop.c"
 #include "makeSpace.c"
@@ -24,21 +24,27 @@ int main(void)
   int buffer_size = PAGE_SIZE * w;  //buffor pamieci
   int address = 0;
   int p;
-  uint64_t measure[64];
+  uint64_t measure[1024*36];
+  FILE *f = fopen("pomiar.txt", "w");
+
   address = makeSpace(number_of_pages);
 
     for( p = 64; p < number_of_pages; p++){
       store(address, p);
-      start1=clock_start();
-      load(address);
-      end1 = clock_stop();
-      measure[p] = end1 - start1;
-    }
+      for(int i = 0; i < 1024; i ++)  //powinno zapisac cala strone
+        {
+          start1=clock_start();
+          load(address, i);
+          end1 = clock_stop();
+          measure[(p-64)*i] = end1 - start1;
+          fprintf(f, "%lld\n", measure[(p-64)*i]);
+        }
 
 
-    for( p = 64; p < number_of_pages; p++){
-      printf("%d. wynik= %lld\n", p, measure[p]);
+
     }
+    fclose(f);
+
 
 	return 0;
 }
