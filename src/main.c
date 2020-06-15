@@ -11,40 +11,31 @@
 #include "store.c"
 #include "load.c"
 
-const int PAGE_COUNT = 64; //okienko
-int number_of_pages = 100; //ile stron mamy sprawdzić
+const int PAGE_COUNT = 64; //window = 64
+int number_of_pages = 100; //number of pages to check
 
 int main(void)
 {
-	printf("The page size for this system is %ld bytes.\n",
-  sysconf(_SC_PAGESIZE));  /*_SC_PAGE_SIZE is OK too.*/
-  uint64_t start1, end1, wynik1; //wyniki pierwszych pomiarow
-  long int PAGE_SIZE = sysconf(_SC_PAGESIZE); //rozmiar strony 4096 bajtow
-  int w = 64; //okno
-  int buffer_size = PAGE_SIZE * w;  //buffor pamieci
+	printf("The page size for this system is %ld bytes.\n", sysconf(_SC_PAGESIZE));  /*_SC_PAGE_SIZE is OK too.*/
+  uint64_t start1, end1, measure; //var's for measurement
   int address = 0;
   int p;
-  uint64_t measure[1024*36];
-  FILE *f = fopen("pomiar.txt", "w");
 
-  address = makeSpace(number_of_pages);
+  FILE *f = fopen("pomiar.txt", "w");   //open file to save results
+  address = makeSpace(number_of_pages); //reserve space for operation
 
-    for( p = 64; p < number_of_pages; p++){
-      store(address, p);
-      for(int i = 0; i < 1024; i ++)  //powinno zapisac cala strone
-        {
-          start1=clock_start();
-          load(address, i);
-          end1 = clock_stop();
-          measure[(p-64)*i] = end1 - start1;
-          fprintf(f, "%lld\n", measure[(p-64)*i]);
-        }
+  for( p = 64; p < number_of_pages; p++){   // start from 64 - window
+    store(address, p);              //store whole page
+    for(int i = 0; i < 1024; i ++)  //load every bit
+      {
+        start1=clock_start();       //start measurement
+        load(address, i);           //perform load on target address and exact bit index
+        end1 = clock_stop();        //end measurment
+        measure = end1 - start1;    
+        fprintf(f, "%lld\n", measure);    //save result into textfile
+      }
 
-
-
-    }
-    fclose(f);
-
-
+  }
+  fclose(f);   //close file
 	return 0;
 }

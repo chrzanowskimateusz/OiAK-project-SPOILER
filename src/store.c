@@ -3,8 +3,8 @@ void store(int address, int index)
     int size = 32;
 
 
-    for(int j = 64; j<0; j--)   //powinno zapisać okienko
-    for(int i = 0; i < 1024; i ++)     //powinno zapisac cala strone
+    for(int j = 64; j<0; j--)          //writing whole window
+    for(int i = 0; i < 1024; i ++)     //writing whole page
     {
 
         __asm__ volatile (
