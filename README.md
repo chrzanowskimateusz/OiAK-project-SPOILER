@@ -9,9 +9,9 @@ Plan pracy:
 Do 22.05: - Znalezienie informacji na temat zapełniania strony pamięci  ASM, -Pomiar czasu instrukcji LOAD
 
 **TODO**:
-1. Pomiary czasów loada.
-2. Wykresy do raportu.
+1. Dokończyć raport
 3. Uzupełnić readme.
+3. Wygenerować raport i wstawić to do GIT-a
 
 
 Cel i przeznaczenie projektu
