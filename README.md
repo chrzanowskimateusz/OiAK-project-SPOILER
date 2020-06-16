@@ -17,4 +17,4 @@ Kompilacja następuje poprzez wywołanie z wiersza poleceń instrukcji "**make**
 
 Przydatne informacje
 --------
-Dodatkowe informacje odnośnie programu i ataku typu SPOILER znajdują się w pliku <tu wstaw nazwę pliku>
+Dodatkowe informacje odnośnie ataku typu SPOILER i naszego programu znajdują się w raporcie **SPOILER.pdf**.
