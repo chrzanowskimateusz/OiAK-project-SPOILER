@@ -1,6 +1,6 @@
 # OiAK project - SPOILER, 2020
 
-Osoba kontaktowa: Artur Saferna 235718
+
 
 
 Cel i przeznaczenie projektu
